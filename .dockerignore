@@ -1,0 +1,8 @@
+﻿node_modules/
+package-lock.json
+bin/
+xray/
+.git/
+.env
+.gitignore
+Dockerfile
