@@ -97,6 +97,7 @@ class ConfigManager {
         });
 
         this.xrayProcess.stdout?.on('data', (data) => {
+            if(data.toString().includes("accepted")) return;
             Logger.info(`[XRay] ${data.toString().trim()}`);
         });
         this.xrayProcess.stderr?.on('data', (data) => {
