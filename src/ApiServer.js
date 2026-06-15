@@ -25,7 +25,7 @@ class ApiServer {
             next();
         });
 
-        // Routes
+        // Config Push Endpoint
         this.app.post('/api/config', (req, res) => {
             try {
                 const { inbounds, clients } = req.body;
@@ -48,7 +48,18 @@ class ApiServer {
             }
         });
         
-        // Catch-all to respond silently
+        // Status Endpoint for monitoring
+        this.app.get('/api/status', (req, res) => {
+            res.status(200).json({
+                uptime: process.uptime(),
+                xray_status: ConfigManager.xrayProcess ? 'running' : 'stopped',
+                xray_pid: ConfigManager.xrayProcess?.pid || null,
+                metrics: {
+                    inbounds_count: ConfigManager.config?.inbounds?.length || 0
+                }
+            });
+        });
+        
         this.app.use((req, res) => {
             res.status(200).send();
         });

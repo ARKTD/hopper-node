@@ -26,6 +26,17 @@ async function bootstrap() {
     await ApiServer.start(process.env.API_PORT || 8080);
 }
 
+// Graceful shutdown handling
+function shutdown() {
+    Logger.info("Received shutdown signal. Stopping services...");
+    ApiServer.stop();
+    ConfigManager.stopXRayCore();
+    process.exit(0);
+}
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
+
 bootstrap().catch(e => {
     Logger.error("Caught an error while starting hopper-node.", e);
     process.exit(1);
