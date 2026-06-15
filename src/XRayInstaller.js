@@ -4,7 +4,7 @@ const os = require('node:os');
 const Logger = require('./Logger.js');
 const { execSync } = require('node:child_process');
 
-const DEST_DIR = path.join(__dirname, '..', 'bin', 'xray');
+const DEST_DIR = path.join(__dirname, '..', 'xray');
 
 async function getLatestRelease() {
     const res = await fetch(`https://api.github.com/repos/XTLS/Xray-core/releases/latest`, {
