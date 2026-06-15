@@ -1,0 +1,27 @@
+{
+  "name": "hopper-node",
+  "version": "1.0.0",
+  "description": "A configurable VPN node for Hopper - VPN Manager.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ARKTD/hopper-node.git"
+  },
+  "keywords": [],
+  "author": "ARKTD",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ARKTD/hopper-node/issues"
+  },
+  "homepage": "https://github.com/ARKTD/hopper-node#readme",
+  "dependencies": {
+    "axios": "^1.17.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
