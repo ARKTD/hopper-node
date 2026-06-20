@@ -29,30 +29,22 @@ class ConfigManager {
     }
 
     /**
-     * @param {Array<Object>} inbounds
-     * @param {Array<Object>} clients
+     * Build the definitive JSON for XRay startup.
+     * Clients are expected to be embedded directly within the individual inbound settings.
+     * @param {Array<Object>} inbounds 
      */
-    buildConfig(inbounds, clients){
+    buildConfig(inbounds){
         let config = {
             log: {
                 loglevel: "warning"
             },
-            /**
-             * @type {Array<Object>}
-             */
-            inbounds: [],
+            inbounds: inbounds || [],
             outbounds: [
                 {
                     protocol: "freedom"
                 }
             ]
         };
-
-        for(let inbound of inbounds){
-            // @ts-ignore
-            inbound['settings']['clients'] = clients;
-            config.inbounds.push(inbound);
-        }
 
         return config;
     }

@@ -28,17 +28,18 @@ class ApiServer {
         // Config Push Endpoint
         this.app.post('/api/config', (req, res) => {
             try {
-                const { inbounds, clients } = req.body;
+                // We only expect 'inbounds'. The Master embeds specific clients per-inbound natively. 
+                const { inbounds } = req.body;
                 
-                if (!Array.isArray(inbounds) || !Array.isArray(clients)) {
+                if (!Array.isArray(inbounds)) {
                     return res.status(400).send();
                 }
                 
-                const newConfig = ConfigManager.buildConfig(inbounds, clients);
+                const newConfig = ConfigManager.buildConfig(inbounds);
                 const changed = ConfigManager.updateConfig(newConfig);
 
                 if(changed){
-                    Logger.info(`Updated config: ${inbounds.length} inbounds, ${clients.length} clients.`);
+                    Logger.info(`Updated config: ${inbounds.length} inbounds synced.`);
                 }
 
                 res.status(200).json({ success: true, updated: changed });
